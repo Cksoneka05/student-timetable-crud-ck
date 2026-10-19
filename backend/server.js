@@ -11,7 +11,13 @@ function validate(b){
  const errors=[];
  for(const f of fields) if(typeof b[f]!=='string'||!b[f].trim()) errors.push(`${f} is required`);
  if(b.status&&!statuses.includes(b.status))errors.push('status must be Planned, In Progress, or Completed');
- for(const f of ['start_time','end_time']) if(b[f]&&!/^([01]\\d|2[0-3]):[0-5]\\d$/.test(b[f]))errors.push(`${f} must use HH:MM format`);
+for (const f of ['start_time', 'end_time']) {
+  const value = String(b[f] ?? '').trim();
+
+  if (value && !/^([01]\d|2[0-3]):[0-5]\d$/.test(value)) {
+    errors.push(`${f} must use HH:MM format`);
+  }
+}
  return errors;
 }
 app.get('/api/health',(_,res)=>res.json({success:true,message:'Timetable API is running'}));
