@@ -1,5 +1,5 @@
 // Replace API_URL with your deployed API base URL when hosting online.
-const API_URL='http://localhost:3000/api/timetable';
+https://student-timetable-crud-ck.onrender.com/api/timetable
 const form=document.getElementById('entry-form'),tbody=document.getElementById('entries-body');
 const fields=['course_code','course_name','day_of_week','start_time','end_time','location','study_goal','status'];
 const notice=document.getElementById('notice');
