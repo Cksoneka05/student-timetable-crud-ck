@@ -1,0 +1,11 @@
+const fs=require('fs'),path=require('path'),sqlite3=require('sqlite3').verbose();
+require('dotenv').config();
+const configured=process.env.DB_PATH||'./data/timetable.db';
+const dbPath=path.isAbsolute(configured)?configured:path.resolve(__dirname,configured);
+fs.mkdirSync(path.dirname(dbPath),{recursive:true});
+const db=new sqlite3.Database(dbPath);
+const run=(sql,params=[])=>new Promise((resolve,reject)=>db.run(sql,params,function(err){if(err)reject(err);else resolve({id:this.lastID,changes:this.changes})}));
+const get=(sql,params=[])=>new Promise((resolve,reject)=>db.get(sql,params,(e,r)=>e?reject(e):resolve(r)));
+const all=(sql,params=[])=>new Promise((resolve,reject)=>db.all(sql,params,(e,r)=>e?reject(e):resolve(r)));
+const initialize=()=>new Promise((resolve,reject)=>db.exec(fs.readFileSync(path.join(__dirname,'schema.sql'),'utf8'),e=>e?reject(e):resolve()));
+module.exports={db,run,get,all,initialize};

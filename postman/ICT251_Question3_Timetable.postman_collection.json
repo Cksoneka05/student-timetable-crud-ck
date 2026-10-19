@@ -1,0 +1,84 @@
+{
+  "info": {
+    "name": "ICT 251 Q3 \u2014 Student Timetable CRUD",
+    "description": "Run after starting the local backend. Seed database starts with ID 1.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:3000"
+    },
+    {
+      "key": "entryId",
+      "value": "1"
+    }
+  ],
+  "item": [
+    {
+      "name": "1 GET all",
+      "request": {
+        "method": "GET",
+        "url": "{{baseUrl}}/api/timetable"
+      }
+    },
+    {
+      "name": "2 GET one",
+      "request": {
+        "method": "GET",
+        "url": "{{baseUrl}}/api/timetable/{{entryId}}"
+      }
+    },
+    {
+      "name": "3 POST create",
+      "request": {
+        "method": "POST",
+        "url": "{{baseUrl}}/api/timetable",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"course_code\": \"ICT251\",\n  \"course_name\": \"Web Application Development\",\n  \"day_of_week\": \"Monday\",\n  \"start_time\": \"14:00\",\n  \"end_time\": \"16:00\",\n  \"location\": \"Computer Lab 1\",\n  \"study_goal\": \"Practise REST API development\",\n  \"status\": \"Planned\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      }
+    },
+    {
+      "name": "4 PUT update",
+      "request": {
+        "method": "PUT",
+        "url": "{{baseUrl}}/api/timetable/{{entryId}}",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"course_code\": \"ICT251\",\n  \"course_name\": \"Web Application Development\",\n  \"day_of_week\": \"Monday\",\n  \"start_time\": \"14:00\",\n  \"end_time\": \"16:00\",\n  \"location\": \"Computer Lab 1\",\n  \"study_goal\": \"Practise and test REST API development\",\n  \"status\": \"In Progress\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      }
+    },
+    {
+      "name": "5 DELETE",
+      "request": {
+        "method": "DELETE",
+        "url": "{{baseUrl}}/api/timetable/{{entryId}}"
+      }
+    }
+  ]
+}

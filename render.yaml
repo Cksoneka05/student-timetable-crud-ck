@@ -1,0 +1,14 @@
+services:
+  - type: web
+    name: ict251-timetable-api
+    runtime: node
+    rootDir: backend
+    buildCommand: npm install
+    startCommand: npm start
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: DB_PATH
+        value: /opt/render/project/src/data/timetable.db
+      - key: CORS_ORIGIN
+        value: "*"
